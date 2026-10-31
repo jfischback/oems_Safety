@@ -1,0 +1,97 @@
+{
+  "redirects": [
+    {
+      "source": "/center_of_gravity",
+      "destination": "/center_of_gravity/",
+      "permanent": false
+    },
+    {
+      "source": "/crane_capacity",
+      "destination": "/crane_capacity/",
+      "permanent": false
+    },
+    {
+      "source": "/dart_rate",
+      "destination": "/dart_rate/",
+      "permanent": false
+    },
+    {
+      "source": "/fall_clearance",
+      "destination": "/fall_clearance/",
+      "permanent": false
+    },
+    {
+      "source": "/lost_time_rate",
+      "destination": "/lost_time_rate/",
+      "permanent": false
+    },
+    {
+      "source": "/sling_tension",
+      "destination": "/sling_tension/",
+      "permanent": false
+    },
+    {
+      "source": "/trir",
+      "destination": "/trir/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/center_of_gravity/",
+      "destination": "/center-of-gravity/index.html"
+    },
+    {
+      "source": "/crane_capacity/",
+      "destination": "/crane-capacity/index.html"
+    },
+    {
+      "source": "/dart_rate/",
+      "destination": "/dart-rate/index.html"
+    },
+    {
+      "source": "/fall_clearance/",
+      "destination": "/fall-clearance/index.html"
+    },
+    {
+      "source": "/lost_time_rate/",
+      "destination": "/lost-time-rate/index.html"
+    },
+    {
+      "source": "/sling_tension/",
+      "destination": "/sling-tension/index.html"
+    },
+    {
+      "source": "/trir/",
+      "destination": "/trir/index.html"
+    },
+    {
+      "source": "/center_of_gravity/:path+",
+      "destination": "/center-of-gravity/:path+"
+    },
+    {
+      "source": "/crane_capacity/:path+",
+      "destination": "/crane-capacity/:path+"
+    },
+    {
+      "source": "/dart_rate/:path+",
+      "destination": "/dart-rate/:path+"
+    },
+    {
+      "source": "/fall_clearance/:path+",
+      "destination": "/fall-clearance/:path+"
+    },
+    {
+      "source": "/lost_time_rate/:path+",
+      "destination": "/lost-time-rate/:path+"
+    },
+    {
+      "source": "/sling_tension/:path+",
+      "destination": "/sling-tension/:path+"
+    },
+    {
+      "source": "/trir/:path+",
+      "destination": "/trir/:path+"
+    }
+  ]
+}

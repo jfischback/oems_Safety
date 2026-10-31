@@ -1,0 +1,9 @@
+{
+ "trir": { "tab": "SAF TRIR", "primaryValue": 2.5 },
+ "dart-rate": { "tab": "SAF DART Rate", "primaryValue": 1.5 },
+ "lost-time-rate": { "tab": "SAF Lost Time Rate", "primaryValue": 1 },
+ "fall-clearance": { "tab": "SAF Fall Clearance", "primaryValue": 17.5, "checkValue": 20, "checkResult": "YES" },
+ "sling-tension": { "tab": "SAF Sling Tension", "primaryValue": 1154.700538 },
+ "center-of-gravity": { "tab": "SAF Center of Gravity", "primaryValue": 4.285714286 },
+ "crane-capacity": { "tab": "SAF Crane Capacity Percent", "primaryValue": 80 }
+}

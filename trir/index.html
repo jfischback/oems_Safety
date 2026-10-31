@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Total Recordable Incident Rate (TRIR) | OEMS Safety Calculators</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../disclaimer.css">
+<script>try { if (localStorage.getItem("oems_saf_disclaimer_v1")) document.documentElement.classList.add("oems-agreed"); } catch (e) {}</script>
+</head>
+<body data-slug="trir">
+  <div class="oems-gate" id="oemsGate">
+    <div class="oems-gate-bar">
+      <div class="oems-gate-brand">
+        <span class="oems-gate-name">OEMS</span>
+        <span class="oems-gate-full">Occupational Exposure Management Systems LLC</span>
+      </div>
+    </div>
+    <div class="oems-gate-card" role="dialog" aria-modal="true" aria-labelledby="oemsGateTitle" tabindex="-1">
+      <h2 id="oemsGateTitle">Before you use this tool</h2>
+      <p>This calculator is provided by OEMS (Occupational Exposure Management Systems) for general informational and educational purposes only. It is not professional safety, engineering, or legal advice, and it does not replace an evaluation by a qualified safety professional, a competent or qualified person, or a registered professional engineer.</p>
+      <p>Results depend entirely on the information you enter and on the assumptions built into the tool. They may be incomplete, inaccurate, or not applicable to your workplace or equipment. You are responsible for verifying all results against applicable federal, state, and local regulations (including OSHA standards such as 29 CFR 1904, 1910, and 1926), consensus standards such as ASME B30, the manufacturer’s instructions, load charts and ratings for your equipment, and your organization’s requirements before relying on them.</p>
+      <p>Do not use this tool as the sole basis for fall protection system design, rigging or lift plans, crane capacity decisions, or OSHA recordkeeping and reporting. Lifting and fall protection decisions must be made by a competent or qualified person using the actual equipment ratings.</p>
+      <p>OEMS makes no warranties, express or implied, about the accuracy, completeness, or fitness for a particular purpose of this tool or its results. To the fullest extent permitted by law, OEMS is not liable for any loss, injury, damage, fine, or penalty arising from use of, or reliance on, this tool.</p>
+      <label class="oems-gate-check"><input type="checkbox" id="oemsGateCheck"> <span>I have read and understand this disclaimer, and I agree to use this tool at my own risk.</span></label>
+      <button type="button" class="oems-gate-btn" id="oemsGateBtn" disabled>I agree — continue</button>
+    </div>
+  </div>
+  <script src="../disclaimer.js"></script>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <span class="brand-name">OEMS</span>
+        <span class="brand-full">Occupational Exposure Management Systems LLC</span>
+      </div>
+      <div class="tag">Exposure assessment tools for Health &amp; Safety Professionals</div>
+    </div>
+  </header>
+
+<main>
+<div id="calc"></div>
+<p class="disclaimer">For estimation only. Not a substitute for a fall protection system design, rigging or lift plan, or evaluation by a competent or qualified person. Always use the manufacturer’s ratings, load charts and instructions for your equipment. Federal rules are shown; state requirements may be more stringent.</p>
+<p class="copyright">© 2026 Occupational Exposure Management Systems LLC. All rights reserved.</p>
+</main>
+<script type="module" src="../app.js"></script>
+</body>
+</html>
