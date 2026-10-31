@@ -1,0 +1,163 @@
+:root {
+  --bg: #eef0f3; --card: #ffffff; --text: #15171c; --muted: #6b7280; --line: #e5e7eb;
+  --accent: #121318; --accent-text: #ffffff; --solved: #e6f2ea; --solved-line: #2e7d4f;
+  --err: #b42318;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+main { max-width: 760px; margin: 24px auto 48px; padding: 24px; background: var(--card); border-radius: 18px; }
+@media (max-width: 560px) { main { margin: 0; border-radius: 0; padding: 20px 16px; } }
+main h1 { font-size: 1.6rem; margin: 8px 0 4px; }
+main h2 { font-size: 1.1rem; margin: 28px 0 8px; color: var(--muted); }
+a { color: #4f46e5; }
+.back { font-size: 0.9rem; }
+.eq {
+  font-family: "Cambria Math", "STIX Two Math", Georgia, serif; font-size: 1.15rem;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; overflow-x: auto;
+}
+.how { color: var(--muted); font-size: 0.95rem; }
+.row {
+  display: grid; grid-template-columns: 1fr 140px; grid-template-areas: "name name" "input unit";
+  gap: 4px 10px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line);
+}
+.row .name { grid-area: name; }
+.row input { grid-area: input; }
+.row .unit { grid-area: unit; color: var(--muted); font-size: 0.9rem; }
+input {
+  width: 100%; font: inherit; padding: 8px 10px; color: var(--text); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px;
+}
+input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+input.solved { background: var(--solved); border-color: var(--solved-line); font-weight: 600; }
+.buttons { display: flex; gap: 10px; margin-top: 18px; }
+button {
+  font: inherit; font-weight: 600; padding: 10px 22px; border-radius: 6px; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--accent-text);
+}
+button.secondary { background: transparent; color: var(--accent); }
+#msg { min-height: 1.5em; margin-top: 14px; font-weight: 600; }
+#msg.err { color: var(--err); }
+.src, .disclaimer { color: var(--muted); font-size: 0.85rem; }
+.disclaimer { margin-top: 32px; border-top: 1px solid var(--line); padding-top: 12px; }
+ul.list { list-style: none; padding: 0; margin: 0; }
+ul.list li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+@media (min-width: 560px) {
+  .row { grid-template-columns: 1fr 160px 150px; grid-template-areas: "name input unit"; }
+}
+
+/* OEMS banner (copied from the APF calculator) */
+/* Header */
+.topbar {
+  position: relative;
+  color: #fff;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(100deg, #0a1631 0%, #0f2b55 50%, #1b4f86 100%);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
+}
+
+/* Fade the grid in toward the right, as in the design */
+.topbar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, #0a1631 0%, rgba(15, 43, 85, 0.85) 45%, rgba(27, 79, 134, 0) 80%);
+  pointer-events: none;
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #38bdf8 0%, #6366f1 50%, #38bdf8 100%);
+}
+
+.topbar-inner {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.brand { display: flex; flex-direction: column; gap: 4px; }
+
+.brand-name {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.brand-full {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+}
+
+.tag {
+  padding-left: 18px;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.9rem;
+  color: #dbe4f0;
+  text-align: right;
+}
+
+.wrap {
+  max-width: 1136px;
+  margin: 0 auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+@media (max-width: 520px) {
+  .tag { display: none; }
+  .brand-name { font-size: 1.7rem; }
+  .brand-full { font-size: 0.6rem; letter-spacing: 0.14em; }
+}
+.copyright { color: var(--muted); font-size: 0.75rem; }
+
+
+/* Calculator additions (shared with the environmental calculators): rule text, notes, threshold checks and select boxes */
+.rule { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; }
+.note { font-size: 0.92rem; padding: 10px 14px; border-radius: 8px; background: #fff7ed; border: 1px solid #fed7aa; }
+h2.check-head { margin-top: 22px; }
+select {
+  width: 100%; font: inherit; padding: 8px 10px; color: var(--text); background: var(--bg);
+  border: 1px solid var(--line); border-radius: 6px;
+}
+.row select { grid-area: input; }
+#verdict { margin: 4px 0 0; padding: 12px 14px; border-radius: 8px; font-weight: 600; }
+#verdict.flag { background: #fff7ed; border: 1px solid #f59e0b; color: #92400e; }
+#verdict.clear { background: var(--solved); border: 1px solid var(--solved-line); color: #1f5f3b; }
+
+/* Pickers, helpers and diagrams */
+.picker { border-bottom: none; padding-bottom: 0; }
+.helper { margin: 12px 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; }
+.helper summary { cursor: pointer; font-weight: 600; }
+.surface { display: grid; grid-template-columns: 1fr 1fr auto; gap: 6px 10px; align-items: end; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.surface select { grid-column: 1 / -1; }
+.surface label span { display: block; color: var(--muted); font-size: 0.8rem; }
+.surface .remove { padding: 8px 14px; }
+@media (min-width: 560px) { .surface { grid-template-columns: 1fr 90px 120px auto; } .surface select { grid-column: auto; } }
+#weighted { min-height: 1.2em; font-weight: 600; }
+#weighted.err { color: var(--err); }
+.diagram { margin-top: 20px; }
+.diagram svg { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.15); }
+.m-lbl { font-family: "Inter", system-ui, sans-serif; font-size: 13px; fill: #15171c; paint-order: stroke; stroke: #f8fafc; stroke-width: 3px; stroke-linejoin: round; }
+.m-bold { font-weight: 700; }
+.m-red { fill: #b42318; }
+.m-green { fill: #2e7d4f; }
+.m-muted { fill: #64748b; font-size: 12px; }
+.m-xs { font-size: 11px; }
