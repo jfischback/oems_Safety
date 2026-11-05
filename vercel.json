@@ -26,6 +26,11 @@
       "permanent": false
     },
     {
+      "source": "/recordability_tool",
+      "destination": "/recordability_tool/",
+      "permanent": false
+    },
+    {
       "source": "/sling_tension",
       "destination": "/sling_tension/",
       "permanent": false
@@ -58,6 +63,10 @@
       "destination": "/lost-time-rate/index.html"
     },
     {
+      "source": "/recordability_tool/",
+      "destination": "/recordability-tool/index.html"
+    },
+    {
       "source": "/sling_tension/",
       "destination": "/sling-tension/index.html"
     },
@@ -84,6 +93,10 @@
     {
       "source": "/lost_time_rate/:path+",
       "destination": "/lost-time-rate/:path+"
+    },
+    {
+      "source": "/recordability_tool/:path+",
+      "destination": "/recordability-tool/:path+"
     },
     {
       "source": "/sling_tension/:path+",

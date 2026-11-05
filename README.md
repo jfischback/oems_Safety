@@ -24,3 +24,13 @@ node tests/check.mjs           # checks every calculator against the Google Shee
 
 ## Hosting
 Static site, no build step. On Vercel, import this repo with the default settings.
+
+## Recordability Determination Tool
+`recordability-tool/` (served at `/recordability_tool/`) walks through OSHA's recordkeeping rules (29 CFR 1904) one question at a time and gives three separate answers: does the case meet the recording criteria, must this employer keep the 300 log, and must it be reported to OSHA right away. It saves nothing and sends nothing; closing or refreshing the page erases the answers. The build spec is `recordability-tool/SPEC.md`.
+- `rules.js`: every rule with its ID, citation and source (regulation or OSHA interpretation), plus the Appendix A industry list, state plans, hearing age-correction tables, first aid list and privacy-case list.
+- `flow.js`: the questions and when each one applies. `engine.js`: the logic. `tool.js`, `tool.css`: the screens. `disclaimer-text.js`: the disclaimer, word for word from the spec.
+
+```
+node tests/recordability.mjs              # test incidents with known answers
+node tests/recordability.mjs --coverage   # which tests check each rule
+```
