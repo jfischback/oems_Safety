@@ -95,7 +95,7 @@ function questionScreen(q) {
     render();
   };
   return frame(q.section,
-    h("form", { class: "rt-card", novalidate: true, autocomplete: "off", onsubmit: e => { e.preventDefault(); go(1); } },
+    h("form", { class: "rt-card", novalidate: true, autocomplete: "off", onsubmit: e => { e.preventDefault(); go(1); }, oninput: () => { err.textContent = ""; }, onchange: () => { err.textContent = ""; } },
       h("p", { class: "rt-step", text: `${q.section} · question ${n}` }),
       heading,
       q.note ? h("p", { class: "rt-note", text: q.note }) : null,
@@ -146,10 +146,27 @@ function inputFor(q, err) {
   }
   if (q.type === "naics") {
     const inp = h("input", { type: "text", inputmode: "numeric", maxlength: "6", autocomplete: "off", value: cur && cur !== U ? cur : "" });
-    const out = h("p", { class: "rt-live", "aria-live": "polite" });
+    const out = h("div", { "aria-live": "polite" });
     const un = unsureBox(cur === U, "Not sure of the NAICS code");
-    const show = () => { const c = inp.value.replace(/\D/g, "").slice(0, 4); out.textContent = c.length < 4 ? "" : NAICS_EXEMPT[c] ? `${c} is listed in Appendix A (${NAICS_EXEMPT[c]}): partially exempt.` : `${c} is not listed in Appendix A.`; };
-    inp.addEventListener("input", show); show();
+    const osha = () => h("a", { href: "https://www.osha.gov/laws-regs/regulations/standardnumber/1904/1904SubpartBAppA", target: "_blank", rel: "noopener noreferrer", text: "OSHA's list" });
+    // Plain-language result for the code entered, with what it means for this employer.
+    const show = () => {
+      const c = inp.value.replace(/\D/g, "").slice(0, 4);
+      if (un.querySelector("input").checked || c.length < 4) { out.replaceChildren(); return; }
+      const sizeLine = A.emp_small === "no" ? "You answered that the company had more than 10 employees last year, so the size exemption does not apply either."
+        : "That is, unless the whole company had 10 or fewer employees at all times last year.";
+      out.replaceChildren(NAICS_EXEMPT[c]
+        ? h("div", { class: "rt-answer clear" },
+            h("p", { class: "rt-answer-head", text: "Result: partially exempt by industry" }),
+            h("p", { text: `${c} (${NAICS_EXEMPT[c]}) is on OSHA's list of partially exempt industries (Appendix A to Subpart B).` }),
+            h("p", {}, h("strong", { text: "What this means: " }), "this establishment does not have to keep the routine OSHA 300 log and 301 forms, unless OSHA or the Bureau of Labor Statistics asks in writing (the next question). It must still report a work-related death, in-patient hospitalization, amputation or loss of an eye to OSHA. The tool will still tell you whether the case meets the recording criteria."))
+        : h("div", { class: "rt-answer flag" },
+            h("p", { class: "rt-answer-head", text: "Result: not exempt by industry" }),
+            h("p", { text: `${c} is not on OSHA's list of partially exempt industries (Appendix A to Subpart B). Most industries are not on it.` }),
+            h("p", {}, h("strong", { text: "What this means: " }), `this establishment must keep the OSHA 300 log, the 301 forms and the 300A annual summary. ${sizeLine}`),
+            h("p", { class: "src" }, "OSHA's list uses 2007 NAICS codes. If your industry's code has changed since then (restaurants are one example: 722511 today, 7221 on the list), check ", osha(), " for your industry, or choose Not sure.")));
+    };
+    inp.addEventListener("input", show); un.querySelector("input").addEventListener("change", show); show();
     return {
       input: h("div", {}, field("NAICS code (4 to 6 digits)", inp, `Appendix A list last checked ${NAICS_CHECKED}.`), out, un),
       read: soft => {

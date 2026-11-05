@@ -45,6 +45,11 @@ table.rt-levels { border-collapse: collapse; min-width: 420px; }
 .rt-period .remove { grid-column: 1 / -1; justify-self: start; padding: 6px 14px; margin: 4px 0 6px; }
 @media (max-width: 520px) { .rt-period { grid-template-columns: 1fr; } }
 
+.rt-answer { margin: 12px 0; padding: 12px 14px; border-radius: 8px; font-size: 0.95rem; }
+.rt-answer p { margin: 6px 0; }
+.rt-answer-head { font-weight: 700; font-size: 1rem; }
+.rt-answer.clear { background: var(--solved); border: 1px solid var(--solved-line); }
+.rt-answer.flag { background: #fff7ed; border: 1px solid #f59e0b; }
 .rt-urgent { margin: 14px 0; padding: 12px 14px; border-radius: 8px; background: #fef2f2; border: 2px solid #b42318; color: #7a1a12; }
 .rt-warn { margin: 14px 0; padding: 12px 14px; border-radius: 8px; background: #fff7ed; border: 2px solid #f59e0b; color: #7c2d12; }
 .rt-meta { color: var(--muted); font-size: 0.9rem; }
