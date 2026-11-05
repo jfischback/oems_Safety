@@ -48,9 +48,35 @@ ${COPYRIGHT}
     "../"));
 }
 
+// The Recordability Determination Tool is its own page (recordability-tool/). It has no first-visit gate and no
+// Google Fonts: its spec says it saves nothing (not even the "I understand" click) and sends nothing over the network.
+const TOOLS = [{ slug: "recordability-tool", name: "Recordability Determination Tool (OSHA 300 log)", group: "Injury and illness rates" }];
+writeFileSync(new URL("recordability-tool/index.html", root), `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Recordability Determination Tool | OEMS Safety Tools</title>
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="tool.css">
+</head>
+<body>
+${TOPBAR}
+<main>
+<p class="back no-print"><a href="../">All safety tools</a></p>
+<div id="app"><noscript><p>This tool needs JavaScript turned on.</p></noscript></div>
+<p class="copyright">© 2026 Occupational Exposure Management Systems LLC. All rights reserved.</p>
+</main>
+<script type="module" src="tool.js"></script>
+</body>
+</html>
+`);
+
 const list = GROUPS.map(g => `<h2>${g}</h2>
 <ul class="list">
-${CALCULATORS.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name}</a></li>`).join("\n")}
+${[...CALCULATORS, ...TOOLS].filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name}</a></li>`).join("\n")}
 </ul>`).join("\n");
 
 writeFileSync(new URL("index.html", root), page("OEMS Safety Calculators", "", `<main>
@@ -61,7 +87,7 @@ ${list}
 ${COPYRIGHT}
 </main>`, ""));
 
-const aliases = CALCULATORS.map(c => c.slug).sort().map(slug => [slug.replace(/-/g, "_"), slug]);
+const aliases = [...CALCULATORS, ...TOOLS].map(c => c.slug).sort().map(slug => [slug.replace(/-/g, "_"), slug]);
 writeFileSync(new URL("vercel.json", root), JSON.stringify({
   redirects: aliases.map(([u]) => ({ source: `/${u}`, destination: `/${u}/`, permanent: false })),
   rewrites: [
