@@ -24,3 +24,6 @@ node tests/check.mjs           # checks every calculator against the Google Shee
 
 ## Hosting
 Static site, no build step. On Vercel, import this repo with the default settings.
+
+## Combined pages
+`combos.js` lists the combined pages. Each is one page with a picker over calculators already in `calculators.js`. `combo.js` shows the chosen calculator with the same page code (`app.js`) and equations as its own page, and keeps what is typed in any box both calculators share. The individual calculator pages are unchanged. To add a combined page, add an entry to `combos.js` and run `node scripts/build-pages.mjs`.

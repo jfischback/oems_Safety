@@ -5,6 +5,7 @@
 // disclaimer.js, disclaimer.css) match the IH calculators (copied from the APF calculator); the agreement text is for safety.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { CALCULATORS, GROUPS } from "../calculators.js";
+import { COMBOS } from "../combos.js";
 
 const root = new URL("../", import.meta.url);
 const read = p => readFileSync(new URL(p, root), "utf8");
@@ -48,9 +49,26 @@ ${COPYRIGHT}
     "../"));
 }
 
+// Combined pages (combos.js, combo.js): one page with a picker over related calculators.
+for (const c of COMBOS) {
+  mkdirSync(new URL(`${c.slug}/`, root), { recursive: true });
+  writeFileSync(new URL(`${c.slug}/index.html`, root), page(
+    `${c.name} | OEMS Safety Calculators`,
+    ` class="combo" data-combo="${c.slug}"`,
+    `<main>
+<div id="combo"></div>
+<div id="calc"></div>
+<p class="disclaimer">${DISCLAIMER}</p>
+${COPYRIGHT}
+</main>
+<script type="module" src="../combo.js"></script>`,
+    "../"));
+}
+const comboLinks = g => COMBOS.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name} (combined)</a></li>\n`).join("");
+
 const list = GROUPS.map(g => `<h2>${g}</h2>
 <ul class="list">
-${CALCULATORS.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name}</a></li>`).join("\n")}
+${comboLinks(g)}${CALCULATORS.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name}</a></li>`).join("\n")}
 </ul>`).join("\n");
 
 writeFileSync(new URL("index.html", root), page("OEMS Safety Calculators", "", `<main>
@@ -61,7 +79,7 @@ ${list}
 ${COPYRIGHT}
 </main>`, ""));
 
-const aliases = CALCULATORS.map(c => c.slug).sort().map(slug => [slug.replace(/-/g, "_"), slug]);
+const aliases = [...CALCULATORS, ...COMBOS].map(c => c.slug).sort().map(slug => [slug.replace(/-/g, "_"), slug]);
 writeFileSync(new URL("vercel.json", root), JSON.stringify({
   redirects: aliases.map(([u]) => ({ source: `/${u}`, destination: `/${u}/`, permanent: false })),
   rewrites: [

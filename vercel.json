@@ -21,6 +21,11 @@
       "permanent": false
     },
     {
+      "source": "/injury_rates",
+      "destination": "/injury_rates/",
+      "permanent": false
+    },
+    {
       "source": "/lost_time_rate",
       "destination": "/lost_time_rate/",
       "permanent": false
@@ -54,6 +59,10 @@
       "destination": "/fall-clearance/index.html"
     },
     {
+      "source": "/injury_rates/",
+      "destination": "/injury-rates/index.html"
+    },
+    {
       "source": "/lost_time_rate/",
       "destination": "/lost-time-rate/index.html"
     },
@@ -80,6 +89,10 @@
     {
       "source": "/fall_clearance/:path+",
       "destination": "/fall-clearance/:path+"
+    },
+    {
+      "source": "/injury_rates/:path+",
+      "destination": "/injury-rates/:path+"
     },
     {
       "source": "/lost_time_rate/:path+",

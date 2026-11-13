@@ -161,3 +161,11 @@ select {
 .m-green { fill: #2e7d4f; }
 .m-muted { fill: #64748b; font-size: 12px; }
 .m-xs { font-size: 11px; }
+
+/* Combined pages (combo.js): the picker, and the chosen calculator shown under it */
+.combo-pick { display: grid; gap: 6px; margin: 14px 0 20px; padding: 14px; border: 1px solid var(--line); border-radius: 10px; }
+.combo-pick span { font-weight: 600; }
+.combo-pick select { width: 100%; font: inherit; padding: 9px 10px; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; }
+.combo #calc .back { display: none; }
+.combo #calc h1 { font-size: 1.25rem; margin-top: 0; }
+@media print { .combo-pick select { border: none; padding: 0; } }
