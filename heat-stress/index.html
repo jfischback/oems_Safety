@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Heat Stress Screening | OEMS Safety Calculators</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../disclaimer.css">
+<link rel="stylesheet" href="heat.css">
+<script>try { if (localStorage.getItem("oems_saf_disclaimer_v1")) document.documentElement.classList.add("oems-agreed"); } catch (e) {}</script>
+</head>
+<body data-slug="heat-stress">
+  <div class="oems-gate" id="oemsGate">
+    <div class="oems-gate-bar">
+      <div class="oems-gate-brand">
+        <span class="oems-gate-name">OEMS</span>
+        <span class="oems-gate-full">Occupational Exposure Management Systems LLC</span>
+      </div>
+    </div>
+    <div class="oems-gate-card" role="dialog" aria-modal="true" aria-labelledby="oemsGateTitle" tabindex="-1">
+      <h2 id="oemsGateTitle">Before you use this tool</h2>
+      <p>This calculator is provided by OEMS (Occupational Exposure Management Systems) for general informational and educational purposes only. It is not professional safety, engineering, or legal advice, and it does not replace an evaluation by a qualified safety professional, a competent or qualified person, or a registered professional engineer.</p>
+      <p>Results depend entirely on the information you enter and on the assumptions built into the tool. They may be incomplete, inaccurate, or not applicable to your workplace or equipment. You are responsible for verifying all results against applicable federal, state, and local regulations (including OSHA standards such as 29 CFR 1904, 1910, and 1926), consensus standards such as ASME B30, the manufacturer’s instructions, load charts and ratings for your equipment, and your organization’s requirements before relying on them.</p>
+      <p>Do not use this tool as the sole basis for fall protection system design, rigging or lift plans, crane capacity decisions, or OSHA recordkeeping and reporting. Lifting and fall protection decisions must be made by a competent or qualified person using the actual equipment ratings.</p>
+      <p>OEMS makes no warranties, express or implied, about the accuracy, completeness, or fitness for a particular purpose of this tool or its results. To the fullest extent permitted by law, OEMS is not liable for any loss, injury, damage, fine, or penalty arising from use of, or reliance on, this tool.</p>
+      <label class="oems-gate-check"><input type="checkbox" id="oemsGateCheck"> <span>I have read and understand this disclaimer, and I agree to use this tool at my own risk.</span></label>
+      <button type="button" class="oems-gate-btn" id="oemsGateBtn" disabled>I agree — continue</button>
+    </div>
+  </div>
+  <script src="../disclaimer.js"></script>
+
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <div class="brand">
+        <span class="brand-name">OEMS</span>
+        <span class="brand-full">Occupational Exposure Management Systems LLC</span>
+      </div>
+      <div class="tag">Exposure assessment tools for Health &amp; Safety Professionals</div>
+    </div>
+  </header>
+
+<main>
+<p class="back"><a href="../">&larr; All safety calculators</a></p>
+<h1>Heat Stress Screening</h1>
+<p class="how">Pick the standard, enter the readings, then press Calculate.</p>
+
+<div class="toggle" role="group" aria-label="Standard">
+  <button type="button" data-std="niosh" aria-pressed="true">NIOSH</button>
+  <button type="button" data-std="osha" aria-pressed="false">OSHA (proposed)</button>
+</div>
+<p class="note" id="oshaNote" hidden>OSHA has no final heat standard. This uses the triggers in OSHA's proposed rule, 29 CFR 1910.148 (published August 30, 2024), which is not in effect.</p>
+
+<label class="row"><span class="name">Temperature units</span>
+  <select id="tempUnit"><option value="F">°F</option><option value="C">°C</option></select><span class="unit"></span></label>
+
+<div id="oshaOnly" hidden>
+  <label class="row"><span class="name">Heat metric</span>
+    <select id="metric"><option value="hi">Heat index</option><option value="wbgt">WBGT</option></select><span class="unit"></span></label>
+</div>
+
+<div id="hiBlock" hidden>
+  <label class="row"><span class="name">Heat index from</span>
+    <select id="hiSource"><option value="air">Temp + RH</option><option value="reading">A reading</option></select><span class="unit"></span></label>
+  <div id="hiFromAir">
+    <label class="row"><span class="name">Air temperature (shade)</span><input id="airT" type="number" step="any" inputmode="decimal"><span class="unit tunit">°F</span></label>
+    <label class="row"><span class="name">Relative humidity</span><input id="rh" type="number" step="any" inputmode="decimal"><span class="unit">%</span></label>
+  </div>
+  <div id="hiFromReading" hidden>
+    <label class="row"><span class="name">Heat index</span><input id="hiReading" type="number" step="any" inputmode="decimal"><span class="unit tunit">°F</span></label>
+  </div>
+</div>
+
+<div id="wbgtBlock">
+  <div id="nioshOnly">
+    <label class="row"><span class="name">Worker acclimatized to heat?</span>
+      <select id="acclim"><option value="yes">Yes</option><option value="no">No</option></select><span class="unit"></span></label>
+  </div>
+  <label class="row"><span class="name">Metabolic rate units</span>
+    <select id="metUnit"><option value="W">Watts</option><option value="kcal">kcal/h</option></select><span class="unit"></span></label>
+  <h2>Work</h2>
+  <label class="row"><span class="name">Minutes of work in each hour</span><input id="workMin" type="number" step="any" inputmode="decimal" value="60" data-default="60"><span class="unit">min</span></label>
+  <label class="row"><span class="name">WBGT at the work area</span><input id="wbgtWork" type="number" step="any" inputmode="decimal"><span class="unit tunit">°F</span></label>
+  <label class="row"><span class="name">Metabolic rate during work</span><input id="mWork" type="number" step="any" inputmode="decimal"><span class="unit munit">W</span></label>
+  <div id="restBlock" hidden>
+    <h2>Rest (the rest of the hour)</h2>
+    <label class="row"><span class="name">WBGT at the rest area</span><input id="wbgtRest" type="number" step="any" inputmode="decimal"><span class="unit tunit">°F</span></label>
+    <label class="row"><span class="name">Metabolic rate during rest</span><input id="mRest" type="number" step="any" inputmode="decimal"><span class="unit munit">W</span></label>
+  </div>
+
+  <details class="helper">
+    <summary>Calculate WBGT from thermometer readings</summary>
+    <label class="row"><span class="name">Location (indoors or no sun, or outdoors in sun)</span>
+      <select id="hSun"><option value="indoor">No sun</option><option value="sun">Outdoors in sun</option></select><span class="unit"></span></label>
+    <label class="row"><span class="name">Natural wet bulb</span><input id="hNwb" type="number" step="any" inputmode="decimal"><span class="unit tunit">°F</span></label>
+    <label class="row"><span class="name">Globe</span><input id="hGlobe" type="number" step="any" inputmode="decimal"><span class="unit tunit">°F</span></label>
+    <label class="row" id="hDryRow" hidden><span class="name">Dry bulb (air)</span><input id="hDry" type="number" step="any" inputmode="decimal"><span class="unit tunit">°F</span></label>
+    <p class="src">Indoors: WBGT = 0.7 NWB + 0.3 GT. Outdoors in sun: WBGT = 0.7 NWB + 0.2 GT + 0.1 DB (NIOSH 2016-106, Section 9.3.2).</p>
+    <div class="buttons"><button type="button" id="hCalc" class="secondary">Calculate</button><button type="button" id="hToWork" class="secondary">Use for work area</button><button type="button" id="hToRest" class="secondary">Use for rest area</button></div>
+    <p id="hOut"></p>
+  </details>
+
+  <details class="helper">
+    <summary>Metabolic rate ranges by workload (NIOSH)</summary>
+    <table class="res">
+      <tr><th>Workload</th><th>Metabolic rate</th></tr>
+      <tr><td>Light</td><td>under 233 W (under 200 kcal/h)</td></tr>
+      <tr><td>Moderate</td><td>234 to 349 W (201 to 300 kcal/h)</td></tr>
+      <tr><td>Heavy</td><td>350 to 465 W (301 to 400 kcal/h)</td></tr>
+      <tr><td>Very heavy</td><td>466 to 580 W (401 to 500 kcal/h)</td></tr>
+    </table>
+    <p class="src">NIOSH column of Table 5-1, NIOSH 2016-106. NIOSH's own example uses 300 kcal/h (348.9 W) for a moderate workload. Enter the rate for your task; the tool does not pick one for you.</p>
+  </details>
+</div>
+
+<div class="buttons"><button type="button" id="calcBtn">Calculate</button><button type="button" id="clearBtn" class="secondary">Clear</button></div>
+<div id="result" hidden></div>
+
+<h2>How it works</h2>
+<div class="rule">
+<p><b>NIOSH.</b> RAL (unacclimatized) = 59.9 − 14.1 log<sub>10</sub>M and REL (acclimatized) = 56.7 − 11.5 log<sub>10</sub>M, in °C-WBGT, with M in watts (NIOSH 2016-106, Section 8.1). WBGT and M are 1-hour time-weighted averages that include rest periods (Sections 1.1.2 and 1.1.3). 1 kcal/h = 1.16 W.</p>
+<p><b>OSHA (proposed).</b> Initial heat trigger: heat index of 80 °F, or a WBGT equal to the NIOSH RAL. High heat trigger: heat index of 90 °F, or a WBGT equal to the NIOSH REL. Heat index is the National Weather Service heat index. Exposures of 15 minutes or less in any 60-minute period are outside the proposed rule.</p>
+<p><b>Limits of this screen.</b> The NIOSH limits are for a 70 kg (154 lb) worker in one layer of normal work clothing. They do not cover heavier protective clothing; NIOSH notes that when vapor-impermeable clothing is worn, dry bulb temperature is a better measure than WBGT.</p>
+</div>
+
+<p class="disclaimer">For screening only. Not a substitute for an evaluation by a qualified industrial hygienist or a heat illness prevention program. Measure WBGT at the worker's position. State heat rules may apply and may be stricter.</p>
+<p class="copyright">© 2026 Occupational Exposure Management Systems LLC. All rights reserved.</p>
+</main>
+<script type="module" src="heat-app.js"></script>
+</body>
+</html>

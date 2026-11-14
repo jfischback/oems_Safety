@@ -21,6 +21,11 @@
       "permanent": false
     },
     {
+      "source": "/heat_stress",
+      "destination": "/heat_stress/",
+      "permanent": false
+    },
+    {
       "source": "/injury_rates",
       "destination": "/injury_rates/",
       "permanent": false
@@ -59,6 +64,10 @@
       "destination": "/fall-clearance/index.html"
     },
     {
+      "source": "/heat_stress/",
+      "destination": "/heat-stress/index.html"
+    },
+    {
       "source": "/injury_rates/",
       "destination": "/injury-rates/index.html"
     },
@@ -89,6 +98,10 @@
     {
       "source": "/fall_clearance/:path+",
       "destination": "/fall-clearance/:path+"
+    },
+    {
+      "source": "/heat_stress/:path+",
+      "destination": "/heat-stress/:path+"
     },
     {
       "source": "/injury_rates/:path+",

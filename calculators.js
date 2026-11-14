@@ -161,4 +161,4 @@ export const CALCULATORS = [
   },
 ];
 
-export const GROUPS = ["Injury and illness rates", "Fall protection", "Rigging and lifting"];
+export const GROUPS = ["Injury and illness rates", "Fall protection", "Rigging and lifting", "Heat stress"];

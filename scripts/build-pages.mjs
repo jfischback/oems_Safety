@@ -64,11 +64,13 @@ ${COPYRIGHT}
 <script type="module" src="../combo.js"></script>`,
     "../"));
 }
+// Standalone pages (own HTML and script, not built here) that still get a list entry and web addresses.
+const STANDALONE = [{ slug: "heat-stress", name: "Heat Stress Screening (NIOSH and OSHA proposed)", group: "Heat stress" }];
 const comboLinks = g => COMBOS.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name} (combined)</a></li>\n`).join("");
 
 const list = GROUPS.map(g => `<h2>${g}</h2>
 <ul class="list">
-${comboLinks(g)}${CALCULATORS.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name}</a></li>`).join("\n")}
+${comboLinks(g)}${STANDALONE.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name}</a></li>\n`).join("")}${CALCULATORS.filter(c => c.group === g).map(c => `<li><a href="${c.slug}/">${c.name}</a></li>`).join("\n")}
 </ul>`).join("\n");
 
 writeFileSync(new URL("index.html", root), page("OEMS Safety Calculators", "", `<main>
@@ -79,7 +81,7 @@ ${list}
 ${COPYRIGHT}
 </main>`, ""));
 
-const aliases = [...CALCULATORS, ...COMBOS].map(c => c.slug).sort().map(slug => [slug.replace(/-/g, "_"), slug]);
+const aliases = [...CALCULATORS, ...COMBOS, ...STANDALONE].map(c => c.slug).sort().map(slug => [slug.replace(/-/g, "_"), slug]);
 writeFileSync(new URL("vercel.json", root), JSON.stringify({
   redirects: aliases.map(([u]) => ({ source: `/${u}`, destination: `/${u}/`, permanent: false })),
   rewrites: [

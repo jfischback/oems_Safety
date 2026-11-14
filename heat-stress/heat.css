@@ -1,0 +1,13 @@
+.toggle { display: inline-flex; border: 1px solid var(--accent); border-radius: 8px; overflow: hidden; margin: 10px 0 6px; }
+.toggle button { border: 0; border-radius: 0; background: transparent; color: var(--accent); padding: 9px 18px; }
+.toggle button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+[hidden] { display: none !important; }
+.buttons { flex-wrap: wrap; }
+table.res { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.95rem; }
+table.res td, table.res th { padding: 7px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+table.res td:last-child { font-weight: 600; }
+table.res th { color: var(--muted); font-weight: 600; }
+.req { margin: 10px 0 0; padding-left: 20px; }
+.req li { margin: 3px 0; }
+.rule p { margin: 6px 0; }
+#hOut { font-weight: 600; }
